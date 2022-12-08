@@ -1,0 +1,70 @@
+syntax = "proto3";
+package Hello;
+
+option go_package = ".;pb";
+
+message Posts{
+  string Title = 1;
+  string Email = 2;
+  string Code = 3;
+  string  Content = 4;
+  string Image = 5;
+  string User = 6;
+}
+message InsertPostRequest{
+  string Title = 1;
+  string Email = 2;
+  string Code = 3;
+  string  Content = 4;
+  string Image = 5;
+  string User = 6;
+}
+message InsertPostResponse{
+  Posts post = 1;
+}
+
+message FindAllRequest{
+
+}
+message FindAllResponse{
+  repeated Posts post = 1;
+}
+message SearchPostRequest{
+  string Title = 1;
+}
+message SearchPostResponse{
+  repeated Posts post = 1;
+}
+
+message UpdatePostRequest{
+  string Title = 1;
+}
+message UpdatePostResponse{
+  string Title = 1;
+}
+message UpdateNew{
+  UpdatePost updatePost =1;
+  UpdatePostRequest updateRequest =2;
+}
+message UpdatePost{
+  string Email = 2;
+  string Code = 3;
+  string  Content = 4;
+  string Image = 5;
+  string User = 6;
+}
+
+message DeletePostRequest{
+  string Title = 1;
+}
+message DeletePostResponse{
+  string Title = 1;
+}
+
+service PostServices{
+  rpc InsertPosts(InsertPostRequest) returns(InsertPostRequest);
+  rpc SearchPosts(SearchPostRequest)returns(SearchPostResponse);
+  rpc FindAllPosts(FindAllRequest)returns(FindAllResponse);
+  rpc UpdatePosts(UpdateNew)returns(UpdatePostResponse);
+  rpc DeletePosts(DeletePostRequest)returns(DeletePostResponse);
+}
